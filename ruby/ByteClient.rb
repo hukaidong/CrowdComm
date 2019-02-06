@@ -47,5 +47,5 @@ module CrowdComm
 end
 
 if __FILE__ == $0
-  CrowdComm::ByteClient.new('ipc:///tmp/sock_temp').dummy_serve 
+  CrowdComm::ByteClient.new('tcp://localhost:6566').dummy_serve 
 end

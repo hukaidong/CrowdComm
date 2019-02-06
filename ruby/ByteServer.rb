@@ -38,7 +38,7 @@ module CrowdComm
       begin
         loop do
           msg = get_bytes
-          send_bytes "I've got: #{msg}"
+          send_bytes "From Ruby, I've got: #{msg}"
         end
       rescue Interrupt => e
         puts "\rServer shutting down..."
@@ -49,5 +49,5 @@ module CrowdComm
 end
 
 if __FILE__ == $0
-  CrowdComm::ByteServer.new('ipc:///tmp/sock_temp').dummy_serve
+  CrowdComm::ByteServer.new('tcp://*:6566').dummy_serve
 end
