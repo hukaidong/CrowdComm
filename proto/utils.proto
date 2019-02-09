@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package CrowdWorld.proto;
+
+enum Config_Type {
+// Modification
+  CREATE = 0;
+  UPDATE = 1;
+  RESET  = 2;
+// Data
+  CURRENT = 3;
+  HISTORY = 4;
+  ADVICED = 5;
+// Misc
+  HYBRID  = 6;
+}
+
+message Vec2 {
+  double x = 1;
+  double y = 2;
+}
+
+message Vec3 {
+  double x = 1;
+  double y = 2;
+  double z = 3;
+}
+
+message Vec4 {
+  double x = 1;
+  double y = 2;
+  double z = 3;
+  double w = 4;
+}
+

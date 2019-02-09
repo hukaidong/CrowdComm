@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package CrowdWorld.proto;
+
+import "utils.proto";
+
+message Agent_Data {
+  Vec3 location = 1;
+  Vec3 velocity = 2;
+  Vec3 forwards = 3;
+  Vec3 target = 4;
+}
+
+message Agent {
+  bytes id = 1;
+  string nickname = 2;
+  Config_Type config = 3;
+  repeated Agent_Data data = 4;
+  int64 timestamp = 5;
+}
+
+message Cube_Data {
+  Vec3 center = 1;
+  Vec3 scale = 2;
+  Vec3 forward = 3;
+}
+
+message Cube {
+  bytes id = 1;
+  Config_Type config = 3;
+  Cube_Data data = 4;
+  int64 timestamp = 5;
+}
+
+message World {
+  bytes id = 1;
+  string detail = 2;
+  Config_Type config = 3;
+  repeated Agent agents = 4;
+  repeated Cube cubes = 5;
+}

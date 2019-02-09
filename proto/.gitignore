@@ -1,1 +1,6 @@
-bin/
+cs/*
+cpp/*
+pythno/*
+ruby/*
+
+!.gitkeep
