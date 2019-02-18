@@ -17,6 +17,7 @@ message Agent {
   Config_Type config = 3;
   repeated Agent_Data data = 4;
   int64 timestamp = 5;
+  repeated Query query = 8;
 }
 
 message Cube_Data {
@@ -30,6 +31,7 @@ message Cube {
   Config_Type config = 3;
   Cube_Data data = 4;
   int64 timestamp = 5;
+  repeated Query query = 8;
 }
 
 message World {
@@ -38,4 +40,5 @@ message World {
   Config_Type config = 3;
   repeated Agent agents = 4;
   repeated Cube cubes = 5;
+  repeated Query query = 8;
 }

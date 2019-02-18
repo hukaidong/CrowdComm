@@ -17,22 +17,25 @@ module CrowdWorld
       def up
         Vec3[0, 1, 0]
       end
+
+      def forward
+        Vec3[1, 0, 0]
+      end
+
     end
   end
 
   class Creater
-    class << self
-      keywords = %w[World Agent Cube Agent_Data Cube_Data]
+    keywords = %w[World Agent Cube Agent_Data Cube_Data Query]
 
-      keywords.each do |keyword|
-        class_eval <<-Method
-          def #{keyword.downcase}
-            pb = CrowdWorld::Proto::#{keyword}.new
-            yield pb
-            pb
-          end
-        Method
-      end
+    keywords.each do |keyword|
+      class_eval <<-Method
+        def self.#{keyword.downcase}
+          pb = CrowdWorld::Proto::#{keyword}.new
+          yield pb
+          pb
+        end
+      Method
     end
   end
 end

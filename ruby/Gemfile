@@ -5,3 +5,7 @@ ruby '2.5'
 gem 'ffi-rzmq'
 gem 'google-protobuf'
 gem 'nokogiri'
+
+group :development do 
+  gem 'pry'
+end
