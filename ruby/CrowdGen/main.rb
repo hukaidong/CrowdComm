@@ -1,3 +1,4 @@
+require 'base64'
 require 'securerandom'
 require 'nokogiri'
 require './gen'
@@ -23,5 +24,5 @@ world = CrowdWorld::Creater.world do |w|
   end
 end
 
-puts world.agents.length
-puts world.cubes.length
+proto = world.to_proto
+puts Base64.encode64(proto)
