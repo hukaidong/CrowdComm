@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="google.protobuf" Version="3.6.1" />
     <PackageReference Include="protobuf" Version="2.6.1.1" />
   </ItemGroup>
 

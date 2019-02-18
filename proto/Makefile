@@ -1,12 +1,15 @@
 PROTOSOURCE = $(wildcard *.proto)
 PROTORB = $(addprefix ruby/, \
 	$(addsuffix _pb.rb, $(basename $(PROTOSOURCE)) ) )
+PROTOCS = $(addprefix cs/, \
+	$(addsuffix .cs, $(basename $(PROTOSOURCE)) ) )
 
 
 $(PROTORB): $(PROTOSOURCE)
 	-protoc $^ --ruby_out=ruby
 
 ruby: $(PROTORB)
+cs: $(PROTOCS)
 
 all:
 
@@ -16,4 +19,4 @@ clean:
 	-rm $(PROTORB)
 
 .PHONY:
-	all clean ruby
+	all clean ruby cs
