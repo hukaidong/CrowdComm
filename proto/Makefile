@@ -8,10 +8,13 @@ PROTOCS = $(addprefix cs/, \
 $(PROTORB): $(PROTOSOURCE)
 	-protoc $^ --ruby_out=ruby
 
+$(PROTOCS): $(PROTOSOURCE)
+	-protoc $^ --csharp_out=cs
+
+all: ruby cs
+
 ruby: $(PROTORB)
 cs: $(PROTOCS)
-
-all:
 
 
 clean: 
