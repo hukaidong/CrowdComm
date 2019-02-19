@@ -6,8 +6,8 @@ require '../CrowdWorld/main'
 
 include Nokogiri
 
-Dir.glob('Projects/SteerSuite/testcases/*', :base =>Dir.home)
-pos = File.join(Dir.home, 'Projects/SteerSuite/testcases/hallway-four-way-2.xml')
+dirs = Dir.glob('Projects/SteerSuite/testcases/*', :base =>Dir.home)
+pos = File.join(Dir.home, 'Projects/SteerSuite/testcases/basic-office.xml')
 file = File.read(pos)
 SAMPLEXML = XML.parse file
 
