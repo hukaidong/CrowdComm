@@ -26,12 +26,14 @@ message Query {
 message Vec2 {
   double x = 1;
   double y = 2;
+  bool hasValue = 8;
 }
 
 message Vec3 {
   double x = 1;
   double y = 2;
   double z = 3;
+  bool hasValue = 8;
 }
 
 message Vec4 {
@@ -39,5 +41,6 @@ message Vec4 {
   double y = 2;
   double z = 3;
   double w = 4;
+  bool hasValue = 8;
 }
 

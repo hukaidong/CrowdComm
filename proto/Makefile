@@ -14,6 +14,7 @@ $(PROTOCS): $(PROTOSOURCE)
 all: ruby cs
 
 ruby: $(PROTORB)
+
 cs: $(PROTOCS)
 
 

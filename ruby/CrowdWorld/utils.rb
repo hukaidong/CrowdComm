@@ -6,12 +6,12 @@ module CrowdWorld
     attr_reader :proto
 
     def initialize(x, y, z)
-      @proto = CrowdWorld::Proto::Vec3.new(x: x, y: y, z: z)
+      @proto = CrowdWorld::Proto::Vec3.new(x: x, y: y, z: z, hasValue: true)
     end
 
     class << self
       def [](x, y, z)
-        CrowdWorld::Proto::Vec3.new(x: x, y: y, z: z)
+        CrowdWorld::Proto::Vec3.new(x: x, y: y, z: z, hasValue: true)
       end
 
       def up
