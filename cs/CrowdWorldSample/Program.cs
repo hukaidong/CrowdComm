@@ -8,7 +8,7 @@ namespace CrowdWorldSample
     {
         static void Main(string[] args)
         {
-            byte[] data = Convert.FromBase64String(Data.Data_base64); 
+            byte[] data = Convert.FromBase64String(Data.Data_base64_fourways); 
             World w = World.Parser.ParseFrom(data);
             Console.WriteLine(w.ToString());
         }
