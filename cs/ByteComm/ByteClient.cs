@@ -45,5 +45,10 @@ namespace ByteComm
             Send_String(message);
             return Recv_String();
         }
+
+        public void Close()
+        {
+            socket.Close();
+        }
     }
 }

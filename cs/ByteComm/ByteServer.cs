@@ -35,6 +35,13 @@ namespace ByteComm
             return socket.ReceiveFrameString();
         }
 
+        public string Try_Recv_String()
+        {
+            string a;
+            bool result = socket.TryReceiveFrameString(out a);
+            return result? a: "";
+        }
+
         public void Dummy_Serve()
         {
             while (true)
@@ -43,6 +50,11 @@ namespace ByteComm
                 string msg = "From C#, I've got: " + msg_recv;
                 Send_String(msg);
             }
+        }
+
+        public void Close()
+        {
+            socket.Close();
         }
     }
 }
