@@ -7,7 +7,7 @@ enum Config_Type {
 // Modification
   CREATE = 1;   // Create entity.
   UPDATE = 2;   // Update entity.
-  RESET  = 3;   // (Hard) Update entity. Not being used yet.
+  RESET  = 3;   // (Hard) Update entity, with non-refered child removed.
 // Data
   CURRENT = 4;  // Get current status.
   HISTORY = 5;  // Get all available status in record.
