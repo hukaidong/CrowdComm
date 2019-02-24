@@ -3,18 +3,18 @@ syntax = "proto3";
 package CrowdWorld.proto;
 
 enum Config_Type {
-  NONE   = 0;
+  NONE   = 0;   // Default no action state or state heritaged from parent.
 // Modification
-  CREATE = 1;
-  UPDATE = 2;
-  RESET  = 3;
+  CREATE = 1;   // Create entity.
+  UPDATE = 2;   // Update entity.
+  RESET  = 3;   // (Hard) Update entity. Not being used yet.
 // Data
-  CURRENT = 4;
-  HISTORY = 5;
-  ADVICED = 6;
+  CURRENT = 4;  // Get current status.
+  HISTORY = 5;  // Get all available status in record.
+  ADVICED = 6;  // Get virtual advicing status.
 // Misc
-  HYBRID  = 7;
-  QUERY   = 8;
+  HYBRID  = 7;  // Do no action here and proceed children.
+  QUERY   = 8;  // Execute string queries.
 }
 
 message Query {
