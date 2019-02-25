@@ -31,9 +31,9 @@ namespace CrowdWorld
                           continue;
                       }
                       ReqReady = true;
-                      while (!RepReady || _listenerCancelled) {
-                      }
-                      ReqReady = false;
+                      while (!(RepReady || _listenerCancelled)) {
+                        spin.SpinOnce();
+                    }
                       server.TrySendFrame(RepProto);
                   }
               }
