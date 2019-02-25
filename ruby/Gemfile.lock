@@ -1,3 +1,8 @@
+PATH
+  remote: .
+  specs:
+    example (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -20,6 +25,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  example!
   ffi-rzmq
   google-protobuf
   nokogiri

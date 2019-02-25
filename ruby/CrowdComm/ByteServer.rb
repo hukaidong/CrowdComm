@@ -1,4 +1,4 @@
-require './Util'
+require 'CrowdComm/Util'
 
 module CrowdComm
   require 'ffi-rzmq'

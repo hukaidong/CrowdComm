@@ -1,4 +1,4 @@
-require './Util'
+require 'CrowdComm/Util'
 
 module CrowdComm
   require 'ffi-rzmq'
@@ -7,7 +7,7 @@ module CrowdComm
     include ZMQ
     include CrowdComm::Utils
 
-    def initialize(sockname)
+    def initialize(sockname = "tcp://localhost:6566")
       @context = Context.new(1)
       @pipe = @context.socket(REQ)
       rc = @pipe.connect(sockname)

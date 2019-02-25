@@ -1,3 +1,1 @@
-$:.unshift File.join(File.dirname(__FILE__))
-
-require 'crowdworld'
+require 'CrowdWorld/crowdworld'

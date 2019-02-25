@@ -1,9 +1,29 @@
-module CrowdGen
+require 'pry'
+require 'securerandom'
+require 'nokogiri'
+require 'CrowdWorld/main'
 
-  require 'pry'
+module CrowdGen
+  def self.GenerateFromFile filename
+    include Nokogiri
+    file = File.read(filename)
+    samplexml = XML.parse file
+
+    gen = CrowdGen::XMLGenerator.new
+    world = CrowdWorld::Creater.world do |w|
+      w.id = SecureRandom.random_bytes(4)
+      w.config = :CREATE
+      samplexml.css(:obstacle).each do |xml|
+        w.cubes << gen.obstacle(xml)
+      end
+
+      samplexml.css(:agentRegion).each do |xml|
+        w.agents.concat gen.agentRegion(xml)
+      end
+    end
+  end
+
   class XMLGenerator
-    require '../CrowdWorld/main'
-    require 'securerandom'
     include CrowdWorld
 
     attr_reader :xml

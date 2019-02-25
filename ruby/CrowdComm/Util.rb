@@ -1,4 +1,3 @@
-
 module CrowdComm
   require 'ffi-rzmq'
 

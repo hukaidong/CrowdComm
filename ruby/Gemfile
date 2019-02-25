@@ -9,3 +9,5 @@ gem 'nokogiri'
 group :development do 
   gem 'pry'
 end
+
+gemspec
