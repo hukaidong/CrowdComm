@@ -31,11 +31,10 @@ namespace CrowdWorld
                           continue;
                       }
                       ReqReady = true;
-                      while (!RepReady) {
-                        spin.SpinOnce();
+                      while (!RepReady || _listenerCancelled) {
                       }
                       ReqReady = false;
-                      server.SendFrame(RepProto);
+                      server.TrySendFrame(RepProto);
                   }
               }
               NetMQConfig.Cleanup();
