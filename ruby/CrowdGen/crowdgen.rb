@@ -28,24 +28,6 @@ module CrowdGen
 
     attr_reader :xml
 
-    def from_file filename
-      file = File.read(pos)
-      SAMPLEXML = XML.parse file
-
-      gen = CrowdGen::XMLGenerator.new
-      world = CrowdWorld::Creater.world do |w|
-        w.id = SecureRandom.random_bytes(4)
-        w.config = :CREATE
-        SAMPLEXML.css(:obstacle).each do |xml|
-          w.cubes << gen.obstacle(xml)
-        end
-
-        SAMPLEXML.css(:agentRegion).each do |xml|
-          w.agents.concat gen.agentRegion(xml)
-        end
-      end
-    end
-
     def params(array)
       array.each do |attr|
         self.class.define_method(attr.sub(' ', '_')) do
