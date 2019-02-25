@@ -57,9 +57,9 @@ module CrowdGen
           ]
 
           data.scale = Vec3[
-            xmax - xmin,
-            ymax - ymin,
-            zmax - zmin
+            (zmax - zmin),
+            (ymax - ymin),
+            (xmax - xmin)
           ]
           data.forward = Vec3.forward
         end
