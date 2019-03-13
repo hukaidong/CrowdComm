@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-__all__ = {"NumerableT", "DelegateMethod"}
+
+#!/usr/bin/env python
+# encoding: utf-8
+
+__all__ = {"ContainableT", "DelegateMethod"}
 
 
 class DelegateMethod:
@@ -14,41 +18,25 @@ class DelegateMethod:
 DM = DelegateMethod
 
 
-class NumerableT(type):
+class ContainableT(type):
     def __new__(cls, name, bases, d):
-        return super(NumerableT, cls).__new__(cls, name,
-                                              (NumerableK, ) + bases, d)
+        return super(ContainableT, cls).__new__(cls, name,
+                                              (ContainableK, ) + bases, d)
 
     def __init__(cls, name, bases, d):
-        dtype = getattr(cls, "dtype", float)
+        def defattr(self, spec, kls):
+            setattr(self, spec, kls(spec, self._value, DM.BY_CATT))
 
-        def call_on_value(op):
-            def warp(self, *args, **kargs):
-                return getattr(dtype(self._get_value()), op).__call__(
-                    *args, **kargs)
+        assert hasattr(cls, "ChildrenDefs")
+        setattr(cls, "defattr", defattr)
 
-            return warp
+        super(ContainableT, cls).__init__(name, bases, d)
 
-        def delegator(self, name):
-            return getattr(self._get_value(), name)
-
-        assert hasattr(cls, "DELE_OPS")
-        for op in cls.DELE_OPS:
-            setattr(cls, op, call_on_value(op))
-
-        setattr(cls, "__getattr__", delegator)
-
-        super(NumerableT, cls).__init__(name, bases, d)
+    def __call__(self, *args, **kwargs):
+        self.ChildrenDefs()
 
 
-class NumerableK(object):
-    DELE_OPS = [
-        "__eq__", "__gt__", "__lt__", "__ge__", "__lt__", "__le__", "__add__",
-        "__mod__", "__mul__", "__truediv__", "__floordiv__", "__neg__",
-        "__pow__", "__radd__", "__rsub__", "__rmul__", "__repr__",
-        "__rtruediv__", "__rfloordiv__"
-    ]
-
+class ContainableK(object):
     def __init__(self, spec, parent, method, **kargs):
         self._p = parent
         self._v = spec
@@ -77,5 +65,16 @@ class NumerableK(object):
         elif self._m == DM.BY_CATT:
             setattr(self._p(), self._v, value)
 
-    def assign(self, value):
-        self._set_value(value)
+    def _value(self, newvalue = None):
+        if newvalue:
+            self._set_value(newvalue)
+            return newvalue
+        else:
+            return self._get_value()
+
+
+class ContainerExample(object):
+    def ChildrenDefs(self):
+        self.defattr("cont", ContainableK)
+        self.defattr("x", NumerableK)
+        self.defattr("y", NumerableK)
