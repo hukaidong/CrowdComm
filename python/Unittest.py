@@ -2,12 +2,14 @@
 # encoding: utf-8
 
 import unittest
-from .numerable import NumerableT, DelegateMethod
+from .numerable import NumerableT
 from .containable import ContainableT
+from .universe import DelegateMethod
 
 
 class Obj(object):
-    pass
+    def __init__(self, **kwargs):
+        self.__dict__.update(kwargs)
 
 
 class TestNum(object, metaclass=NumerableT):
@@ -25,15 +27,15 @@ def vinit():
     val['var'] == MAGIC_NUM  # Dict
     vcl.var == MAGIC_NUM  # Mimic Attr
     vfn.fn().var == MAGIC_NUM  # Mimic Container
-    vcn().fn().var == MAGIC_NUM  # Minmic P-Container
+    scl.cl.var == MAGIC_NUM  # Mimic Hierarchy Attr
+    vcn().cl.var == MAGIC_NUM  # Minmic P-Container
     '''
-    global val, vfn, vcl
+    global val, vcl, scl, vcn, vfn
     val = VAL
-    vcl = Obj()
-    vcl.__dict__.update(val)
-    vfn = Obj()
-    setattr(vfn, "fn", lambda : vcl)
-    vcn = lambda : vfn
+    vcl = Obj(var=MAGIC_NUM)
+    vfn = Obj(fn=lambda: vcl)
+    scl = Obj(cl=vcl)
+    vcn = lambda: scl
 
 
 class TestNumMethods(unittest.TestCase):
@@ -86,13 +88,13 @@ class TestNumMethods(unittest.TestCase):
         self.assertEqual(num, MAGIC_NUM3)
 
     def test_call(self):
-        num = TestNum("var", lambda : None, DelegateMethod.BY_CALL)
-        self.assertRaises(NotImplementedError, lambda :print(num))
+        num = TestNum("var", lambda: None, DelegateMethod.BY_CALL)
+        self.assertRaises(NotImplementedError, lambda: print(num))
 
 
 class TestContK1(object, metaclass=ContainableT):
     def ChildrenDefs(self):
-        self.defattr("var", NumerableK)
+        self.defattr("var", TestNum)
 
 
 class TestContMethod(unittest.TestCase):
@@ -100,7 +102,9 @@ class TestContMethod(unittest.TestCase):
         vinit()
 
     def test_ccnt(self):
-        cnt = TestContK1(None, vfn, DelegateMethod.BY_CATT)
+        cnt = TestContK1('cl', vcn, DelegateMethod.BY_CATT)
         self.assertTrue(hasattr(cnt, 'var'))
         self.assertEqual(cnt.var, MAGIC_NUM)
 
+        cnt.var.assign(MAGIC_NUM2)
+        self.assertEqual(scl.cl.var, MAGIC_NUM2)
