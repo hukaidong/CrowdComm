@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package CrowdWorld.proto;
 
-import "utils.proto";
+import "CrowdComm/proto/utils.proto";
 
 message Agent_Data {
   Vec3 location = 1;

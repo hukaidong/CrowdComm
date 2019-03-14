@@ -1,4 +1,4 @@
-PROTOSOURCE = $(wildcard *.proto)
+PROTOSOURCE = $(wildcard CrowdComm/proto/*.proto)
 PROTORB = $(addprefix ruby/, \
 	$(addsuffix _pb.rb, $(basename $(PROTOSOURCE)) ) )
 PROTOCS = $(addprefix cs/, \
@@ -8,13 +8,13 @@ PROTOPY = $(addprefix python/, \
 
 
 $(PROTORB): $(PROTOSOURCE)
-	-protoc $^ --ruby_out=ruby
+	-protoc $^ --ruby_out=../ruby
 
 $(PROTOCS): $(PROTOSOURCE)
-	-protoc $^ --csharp_out=cs
+	-protoc $^ --csharp_out=../cs
 
 $(PROTOPY): $(PROTOSOURCE)
-	-protoc $^ --python_out=python
+	-protoc $^ --python_out=../python
 
 all: ruby cs python
 
