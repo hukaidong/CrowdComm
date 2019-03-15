@@ -6,17 +6,16 @@ PROTOCS = $(addprefix cs/, \
 PROTOPY = $(addprefix python/, \
 	$(addsuffix .py, $(basename $(PROTOSOURCE)) ) )
 
+default: ruby cs python
 
 $(PROTORB): $(PROTOSOURCE)
 	-protoc $^ --ruby_out=../ruby
 
 $(PROTOCS): $(PROTOSOURCE)
-	-protoc $^ --csharp_out=../cs
+	-protoc $^ --csharp_out=cs
 
 $(PROTOPY): $(PROTOSOURCE)
 	-protoc $^ --python_out=../python
-
-all: ruby cs python
 
 ruby: $(PROTORB)
 

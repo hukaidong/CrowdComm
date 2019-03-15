@@ -17,10 +17,9 @@ enum Config_Type {
   QUERY   = 8;  // Execute string queries.
 }
 
-message Query {
-  string name = 1;
-  repeated double args = 2;
-  repeated string sargs = 3;
+message QueryArgs {
+  repeated double args = 1;
+  repeated string sargs = 2;
 }
 
 message Vec2 {
