@@ -1,7 +1,7 @@
 require 'pry'
 require 'securerandom'
 require 'nokogiri'
-require 'CrowdWorld/main'
+require 'CrowdComm/main'
 
 module CrowdGen
   def self.GenerateFromFile filename

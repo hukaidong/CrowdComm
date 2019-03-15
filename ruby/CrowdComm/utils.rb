@@ -1,5 +1,5 @@
-require 'utils_pb'
-require 'elements_pb'
+require 'CrowdComm/proto/utils_pb'
+require 'CrowdComm/proto/elements_pb'
 
 module CrowdWorld
   class Vec3
@@ -37,5 +37,22 @@ module CrowdWorld
         end
       Method
     end
+  end
+end
+
+module CrowdComm
+  require 'ffi-rzmq'
+
+  module Utils
+
+    def got_error(rc)
+      unless ZMQ::Util.resultcode_ok?(rc)
+        STDERR.puts "Operation failed, errno [#{ZMQ::Util.errno}] description [#{ZMQ::Util.error_string}]"
+        caller(1).each { |callstack| STDERR.puts(callstack) }
+        return true
+      end
+      false
+    end
+
   end
 end

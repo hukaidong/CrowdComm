@@ -1,2 +1,2 @@
-require "CrowdWorld/main"
+require "CrowdComm/main"
 require "CrowdGen/crowdgen"
