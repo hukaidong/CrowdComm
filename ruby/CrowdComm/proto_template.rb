@@ -1,11 +1,10 @@
 require "securerandom"
 require "CrowdComm/main"
 
-module CrowdComm
+module CrowdGen
   QA = CrowdWorld::Proto::QueryArgs
 
-  def cube
-
+  def init_cube
     cd = CrowdWorld::Proto::Cube_Data.new.to_h
 
     CrowdWorld::Proto::Cube.new(
@@ -13,11 +12,9 @@ module CrowdComm
       config: :CREATE, 
       data: cd.update(cd) {|k, _| Hash.new }
     )
-
   end
 
-  def agent
-
+  def init_agent
     ad = CrowdWorld::Proto::Agent_Data.new.to_h
 
     CrowdWorld::Proto::Agent.new(
@@ -25,6 +22,12 @@ module CrowdComm
       config: :CREATE, 
       data: ad.update(ad) {|k, _| Hash.new }
     )
+  end
 
+  def init_world
+    CrowdWorld::Proto::World.new(
+      id: SecureRandom.hex,
+      config: :CREATE, 
+    )
   end
 end
