@@ -12,12 +12,13 @@ message Agent_Data {
 }
 
 message Agent {
-  bytes id = 1;
+  string id = 1;
   string nickname = 2;
   Config_Type config = 3;
-  repeated Agent_Data data = 4;
+  Agent_Data data = 4;
   int64 timestamp = 5;
   map<string, QueryArgs> queries = 8;
+  repeated Agent_Data data_more = 9;
 }
 
 message Cube_Data {
@@ -35,7 +36,7 @@ message Cube {
 }
 
 message World {
-  bytes id = 1;
+  string id = 1;
   string detail = 2;
   Config_Type config = 3;
   repeated Agent agents = 4;
