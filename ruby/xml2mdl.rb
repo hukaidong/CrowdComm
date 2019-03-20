@@ -1,3 +1,4 @@
+$: << Dir.pwd
 require 'pry'
 require 'rake'
 require 'nokogiri'
