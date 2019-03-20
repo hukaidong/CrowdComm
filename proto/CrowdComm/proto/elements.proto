@@ -9,6 +9,7 @@ message Agent_Data {
   Vec3 velocity = 2;
   Vec3 forwards = 3;
   Vec3 target = 4;
+  Vec3 force = 5;
 }
 
 message Agent {
