@@ -37,4 +37,9 @@ class BaseBallK(object):
         elif self._m == DM.BY_ATTR:
             setattr(self._p, self._v, value)
         elif self._m == DM.BY_CATT:
-            setattr(self._p(), self._v, value)
+            temp = self._p()
+            if hasattr(getattr(temp, self._v), 'CopyFrom'):
+                getattr(temp, self._v).CopyFrom(value)
+            else:
+                setattr(temp, self._v, value)
+            self._p(temp)
